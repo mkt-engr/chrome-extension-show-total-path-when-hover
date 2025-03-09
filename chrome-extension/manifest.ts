@@ -24,7 +24,20 @@ const manifest = {
   description: '__MSG_extensionDescription__',
   host_permissions: ['<all_urls>'],
   // Firefox doesn't support sidePanel (It will be deleted in manifest parser)
-  permissions: ['storage', 'scripting', 'tabs', 'notifications', 'sidePanel'],
+  permissions: [
+    'storage',
+    'scripting',
+    'tabs',
+    'notifications',
+    'sidePanel',
+    /**
+     * URLの変更を検知する
+     *
+     * @see {@link https://developer.chrome.com/docs/extensions/reference/webNavigation}
+     * @see {@link https://stackoverflow.com/questions/4646360/monitoring-history-pushstate-from-a-chrome-extension/9651737}
+     */
+    'webNavigation', //
+  ],
   options_page: 'options/index.html',
   background: {
     service_worker: 'background.js',

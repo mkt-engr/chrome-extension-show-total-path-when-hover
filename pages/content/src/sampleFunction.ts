@@ -1,42 +1,30 @@
-import { findFileNavigation } from '@src/findFileNavigation';
+let isCalled = false;
+
 export function sampleFunction() {
-  console.log('content script - sampleFunction() called from another module');
+  console.log('content script - sampleFunction()が呼ばれた');
 
-  // 現在のURLを保持
-  let currentURL = window.location.href;
+  // URLの変更をchrome.webNavigation.onHistoryStateUpdatedで検知
+  if (!isCalled) {
+    chrome.runtime.onMessage.addListener(message => {
+      console.log('chrome.runtime.onMessage.addListener', message);
 
-  // MutationObserverの設定と開始
-  const startObserver = () => {
-    const observer = new MutationObserver(mutations => {
-      console.log('MutationObserver');
-      // URLの変更をチェック
-      if (currentURL !== window.location.href) {
-        console.log('URLが変更されました！');
-        currentURL = window.location.href;
-      }
-
-      for (const mutation of mutations) {
-        if (mutation.type === 'childList') {
-          findFileNavigation();
-          break;
-        }
+      if (message.type === 'URL_CHANGED') {
+        console.log('URLが変更されました！', message.url);
+        // findFileNavigation();
+        isCalled = true;
       }
     });
+  }
 
-    // GitHub のメインコンテンツが含まれる要素を監視
-    const observerTarget = document.querySelector('body');
-    if (observerTarget) {
-      observer.observe(observerTarget, {
-        childList: true,
-        subtree: true,
-      });
+  const observer = new MutationObserver(function () {
+    console.log('MutationObserverが呼ばれた');
+    const elm = document.getElementById('piyo');
+    if (elm) {
+      // 対象の要素が読み込まれたので、ここで好きなことを行う
+      // これ以上監視を続けない場合は、observer.disconnect()する
     }
-  };
-
-  // 初期実行とObserverの開始
-  document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOMContentLoaded');
-    startObserver(); // startObserverを実行
   });
-  // startObserver();
+
+  const observerTarget = document.querySelector('body')!;
+  observer.observe(observerTarget, { childList: true, subtree: true });
 }

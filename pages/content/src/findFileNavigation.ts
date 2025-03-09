@@ -4,7 +4,7 @@ export const findFileNavigation = () => {
   const targetElements = document.querySelectorAll<HTMLElement>('span.Truncate');
 
   if (targetElements.length === 0) {
-    alert('File navigation not found');
+    // alert('File navigation not found');
   }
 
   console.log('File navigation found');
