@@ -6,20 +6,16 @@ export const findFileNavigation = () => {
     return;
   }
 
-  const a = document.querySelectorAll('clipboard-copy');
-  console.log(a);
   const targetElements = document.querySelectorAll<HTMLElement>('span.Truncate');
   targetElements.forEach((targetElement, index) => {
-    // targetElementの直下のaタグを取得
-    const anchorElement = targetElement.querySelector('a');
-    // const anchorElement = targetElement.querySelector('clipboard-copy');
-    // console.log(anchorElement?.value);
-    const anchorText = anchorElement?.textContent ?? 'No anchor text';
-    // const anchorText = anchorElement?.value ?? 'No anchor text';
+    // targetElementの直下の<clipboard-copy>タグを取得
+    const anchorElement = targetElement.querySelector('clipboard-copy');
+    const anchorText = anchorElement?.getAttribute('value') ?? 'No anchor text';
 
     // src以降のテキストを取得
-    const match = anchorText.match(/src\/.*/);
+    const match = anchorText.match(/src.*/);
     const textToCopy = match ? match[0] : anchorText;
+    console.log({ textToCopy });
 
     // 新しいボタン要素を作成
     const button = document.createElement('button');
