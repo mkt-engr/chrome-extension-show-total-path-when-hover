@@ -24,7 +24,10 @@ export const findFileNavigation = () => {
     button.style.marginLeft = '10px'; // ボタンとtargetElementの間にスペースを追加
     button.addEventListener('click', () => {
       navigator.clipboard.writeText(textToCopy);
-      alert(`copy ${textToCopy}`);
+      button.textContent = 'コピーしました!';
+      setTimeout(() => {
+        button.textContent = 'コピー';
+      }, 3000);
     });
 
     // ボタンをtargetElementの隣に配置
