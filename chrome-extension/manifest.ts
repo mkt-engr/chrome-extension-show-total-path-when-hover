@@ -55,15 +55,18 @@ const manifest = {
   },
   content_scripts: [
     {
-      matches: ['http://*/*', 'https://*/*', '<all_urls>'],
+      // matches: ['http://*/*', 'https://*/*', '<all_urls>'],
+      matches: ['https://github.com/*'],
       js: ['content/index.iife.js'],
     },
     {
-      matches: ['http://*/*', 'https://*/*', '<all_urls>'],
+      // matches: ['http://*/*', 'https://*/*', '<all_urls>'],
+      matches: ['https://github.com/*'],
       js: ['content-ui/index.iife.js'],
     },
     {
-      matches: ['http://*/*', 'https://*/*', '<all_urls>'],
+      // matches: ['http://*/*', 'https://*/*', '<all_urls>'],
+      matches: ['https://github.com/*'],
       css: ['content.css'], // public folder
     },
   ],
