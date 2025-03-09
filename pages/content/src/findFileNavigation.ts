@@ -15,7 +15,6 @@ export const findFileNavigation = () => {
     // src以降のテキストを取得
     const match = anchorText.match(/src.*/);
     const textToCopy = match ? match[0] : anchorText;
-    console.log({ textToCopy });
 
     // 新しいボタン要素を作成
     const button = document.createElement('button');
