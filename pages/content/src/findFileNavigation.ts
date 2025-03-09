@@ -1,3 +1,5 @@
+const BUTTON_ID_PREFIX = 'chrome-extension-copyButton';
+
 export const findFileNavigation = () => {
   console.log('findFileNavigation() called');
 
@@ -8,7 +10,15 @@ export const findFileNavigation = () => {
   }
 
   console.log('File navigation found');
-  targetElements.forEach(targetElement => {
+
+  const existingButton = document.getElementById(`${BUTTON_ID_PREFIX}-0`);
+  if (existingButton) {
+    console.log('Buttons already exist, skipping...');
+    return;
+  }
+
+  targetElements.forEach((targetElement, index) => {
+    const buttonId = `${BUTTON_ID_PREFIX}-${index}`;
     targetElement.style.backgroundColor = 'red';
 
     // targetElementの直下のaタグを取得
@@ -21,6 +31,7 @@ export const findFileNavigation = () => {
 
     // 新しいボタン要素を作成
     const button = document.createElement('button');
+    button.id = buttonId;
     button.textContent = 'コピー';
     button.style.marginLeft = '10px'; // ボタンとtargetElementの間にスペースを追加
     button.addEventListener('click', () => {
