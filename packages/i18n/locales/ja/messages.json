@@ -1,11 +1,11 @@
 {
   "extensionDescription": {
     "description": "拡張機能の説明",
-    "message": "GitHubのPR画面で左側にあるフォルダを全部表示する"
+    "message": "PR画面でsrc以下のファイルパスをコピーする"
   },
   "extensionName": {
     "description": "拡張機能の名前",
-    "message": "GitHubのPRフォルダ表示拡張機能"
+    "message": "src以下のファイルパスをコピーする拡張機能"
   },
   "toggleTheme": {
     "message": "テーマを切り替える"
